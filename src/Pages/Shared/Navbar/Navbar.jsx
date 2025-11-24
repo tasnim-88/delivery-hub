@@ -19,6 +19,13 @@ const Navbar = () => {
         <li><NavLink>About Us</NavLink></li>
         <li><NavLink to={'/sendParcel'}>Send Parcel</NavLink></li>
         <li><NavLink>About Us</NavLink></li>
+
+        {
+            user &&
+            <>
+                <li><NavLink to={'/dashboard/my-parcels'}>My Parcels</NavLink></li>
+            </>
+        }
     </>
     return (
         <div>
@@ -34,7 +41,9 @@ const Navbar = () => {
                             {links}
                         </ul>
                     </div>
-                    <Link to={'/'} className="text-xl"><Logo></Logo></Link>
+                    <Link to={'/'} className="text-xl">
+                        <Logo></Logo>
+                    </Link>
                 </div>
                 <div className="navbar-center hidden lg:flex">
                     <ul className="menu menu-horizontal px-1">
