@@ -4,6 +4,7 @@ import { useLoaderData } from 'react-router';
 import Swal from 'sweetalert2';
 import useAxiosSecure from '../../Hooks/useAxiosSecure';
 import useAuth from '../../Hooks/useAuth';
+import { useNavigate } from 'react-router';
 
 const SendParcel = () => {
     const { register, handleSubmit, control } = useForm()
@@ -11,6 +12,7 @@ const SendParcel = () => {
     const { user } = useAuth()
 
     const axiosSecure = useAxiosSecure()
+    const navigate = useNavigate()
 
     const serviceCenters = useLoaderData()
     const regionsDuplicate = serviceCenters.map(c => c.region)
@@ -50,6 +52,7 @@ const SendParcel = () => {
             }
         }
         console.log('cost', cost);
+        data.cost = cost
         Swal.fire({
             title: "Agree with the cost?",
             text: `You will be charged ${cost} taka.`,
@@ -57,7 +60,7 @@ const SendParcel = () => {
             showCancelButton: true,
             confirmButtonColor: "#3085d6",
             cancelButtonColor: "#d33",
-            confirmButtonText: "I agree."
+            confirmButtonText: "Confirm!"
         }).then((result) => {
             if (result.isConfirmed) {
 
@@ -65,14 +68,18 @@ const SendParcel = () => {
                 axiosSecure.post('/parcels', data)
                     .then(res => {
                         console.log('After saving parcel', res.data);
+                        if (res.data.insertedId) {
+                            navigate('/dashboard/my-parcels')
+                            Swal.fire({
+                                position: "top-end",
+                                icon: "success",
+                                title: "Your work has been saved",
+                                showConfirmButton: false,
+                                timer: 2500
+                            });
+                        }
 
                     })
-
-                // Swal.fire({
-                //     title: "Deleted!",
-                //     text: "Your file has been deleted.",
-                //     icon: "success"
-                // });
             }
         });
 
@@ -148,7 +155,7 @@ const SendParcel = () => {
                         <label className="label">Receiver Name</label>
                         <input type="text" {...register('receiverName')} className="input w-full" placeholder="Enter name" />
                         <label className="label">Sender Email</label>
-                        <input type="email" {...register('senderEmail')} className="input w-full" placeholder="Enter email" />
+                        <input type="email" {...register('receiverEmail')} className="input w-full" placeholder="Enter email" />
 
                         {/* Receiver Region */}
                         <fieldset className="fieldset">
