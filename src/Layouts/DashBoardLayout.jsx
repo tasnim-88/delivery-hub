@@ -1,6 +1,9 @@
 import React from 'react';
 import { Link, NavLink, Outlet } from 'react-router';
 import { TbTruckDelivery } from "react-icons/tb";
+import { CiMoneyCheck1 } from "react-icons/ci";
+import { RiEBike2Fill } from "react-icons/ri";
+
 
 
 const DashBoardLayout = () => {
@@ -18,7 +21,7 @@ const DashBoardLayout = () => {
                 </nav>
                 {/* Page content here */}
                 <Outlet></Outlet>
-    
+
             </div>
 
             <div className="drawer-side is-drawer-close:overflow-visible">
@@ -38,8 +41,18 @@ const DashBoardLayout = () => {
                         {/* Our dashboard links */}
                         <li>
                             <NavLink className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="My Parcels" to={'/dashboard/my-parcels'}>
-                            <TbTruckDelivery size={20}/>
-                            <span className="is-drawer-close:hidden">My Parcels</span></NavLink>
+                                <TbTruckDelivery size={20} />
+                                <span className="is-drawer-close:hidden">My Parcels</span></NavLink>
+                        </li>
+                        <li>
+                            <NavLink className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Payment History" to={'/dashboard/payment-history'}>
+                                <CiMoneyCheck1 size={20} />
+                                <span className="is-drawer-close:hidden">Payment History</span></NavLink>
+                        </li>
+                        <li>
+                            <NavLink className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Approve Rider" to={'/dashboard/approve-rider'}>
+                                <RiEBike2Fill size={20} />
+                                <span className="is-drawer-close:hidden">Approve Rider</span></NavLink>
                         </li>
 
                         {/* List item */}
