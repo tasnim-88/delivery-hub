@@ -20,7 +20,8 @@ const useAxiosSecure = () => {
         const resInterceptor = axiosSecure.interceptors.response.use((response) => {
             return response
         }, (error) => {
-            const statusCode = error.status
+            // console.error('axios response error', error?.response?.status, error?.message);
+            const statusCode = error.response?.status
             if (statusCode === 401 || statusCode === 403) {
                 signOutUser()
                     .then(() => {

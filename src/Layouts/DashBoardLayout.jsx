@@ -3,10 +3,14 @@ import { Link, NavLink, Outlet } from 'react-router';
 import { TbTruckDelivery } from "react-icons/tb";
 import { CiMoneyCheck1 } from "react-icons/ci";
 import { RiEBike2Fill } from "react-icons/ri";
+import { FaUsers } from 'react-icons/fa';
+import useRole from '../Hooks/useRole';
 
 
 
 const DashBoardLayout = () => {
+    const { role } = useRole()
+
     return (
         <div className="drawer lg:drawer-open">
             <input id="my-drawer-4" type="checkbox" className="drawer-toggle" />
@@ -49,11 +53,21 @@ const DashBoardLayout = () => {
                                 <CiMoneyCheck1 size={20} />
                                 <span className="is-drawer-close:hidden">Payment History</span></NavLink>
                         </li>
-                        <li>
-                            <NavLink className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Approve Rider" to={'/dashboard/approve-rider'}>
-                                <RiEBike2Fill size={20} />
-                                <span className="is-drawer-close:hidden">Approve Rider</span></NavLink>
-                        </li>
+                        {
+                            role === 'admin' && 
+                            <>
+                                <li>
+                                    <NavLink className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Approve Rider" to={'/dashboard/approve-rider'}>
+                                        <RiEBike2Fill size={20} />
+                                        <span className="is-drawer-close:hidden">Approve Rider</span></NavLink>
+                                </li>
+                                <li>
+                                    <NavLink className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Users Management" to={'/dashboard/users-management'}>
+                                        <FaUsers size={20} />
+                                        <span className="is-drawer-close:hidden">Users Management</span></NavLink>
+                                </li>
+                            </>
+                        }
 
                         {/* List item */}
                         <li>

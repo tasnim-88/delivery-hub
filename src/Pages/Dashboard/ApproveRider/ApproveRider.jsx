@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import React from 'react';
 import useAxiosSecure from '../../../Hooks/useAxiosSecure';
-import { FaRegTrashAlt, FaUserCheck } from 'react-icons/fa';
+import { FaEye, FaRegTrashAlt, FaUserCheck } from 'react-icons/fa';
 import { IoPersonRemove } from "react-icons/io5";
 import Swal from 'sweetalert2';
 
@@ -68,9 +68,10 @@ const ApproveRider = () => {
                                 <td>
                                     <p className={`${r.status === 'approved' ? 'badge badge-success' : 'badge badge-error'}`}>{r.status}</p>
                                 </td>
-                                <td>
+                                <td className='flex gap-2'>
+                                    <button onClick={() => handleApproval(r)} className='btn'><FaEye /></button>
                                     <button onClick={() => handleApproval(r)} className='btn'><FaUserCheck /></button>
-                                    <button onClick={() => handleRejection(r)} className='btn mx-2'><IoPersonRemove /></button>
+                                    <button onClick={() => handleRejection(r)} className='btn'><IoPersonRemove /></button>
                                     <button className='btn'><FaRegTrashAlt /></button>
                                 </td>
                             </tr>)

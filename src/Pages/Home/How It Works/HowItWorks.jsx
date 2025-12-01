@@ -28,8 +28,8 @@ const HowItWorks = () => {
             <h1 className='text-2xl font-bold'>How it works</h1>
             <div className='flex justify-center items-center gap-2 mt-5'>
                 {
-                    howItWorks.map(data =>
-                        <div className='border rounded-3xl p-3 space-y-3'>
+                    howItWorks.map((data,i) =>
+                        <div key={i} className='border rounded-3xl p-3 space-y-3'>
                             <img src={data.imgIcon} alt="" />
                             <h1 className='font-bold'>{data.title}</h1>
                             <p className='text-gray-500'>{data.description}</p>

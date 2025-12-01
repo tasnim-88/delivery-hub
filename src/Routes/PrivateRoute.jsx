@@ -2,6 +2,7 @@ import React from 'react';
 import useAuth from '../Hooks/useAuth';
 import { PuffLoader } from 'react-spinners';
 import { Navigate, useLocation } from 'react-router';
+import Loading from '../Components/Loading/Loading';
 
 const PrivateRoute = ({ children }) => {
 
@@ -9,7 +10,7 @@ const PrivateRoute = ({ children }) => {
     const location = useLocation()
 
     if (loading) {
-        return <PuffLoader size={24} />
+        return <Loading></Loading>
     }
 
     if (!user) {
